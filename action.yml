@@ -40,9 +40,7 @@ runs:
   using: 'composite'
   steps:
     - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 #Number of commits to fetch. 0 indicates all history for all branches and tags
+      uses: actions/checkout@v4
 
     - name: Prepare
       id: prepare
