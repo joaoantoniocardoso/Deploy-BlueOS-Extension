@@ -36,11 +36,22 @@ inputs:
     default: ${{ github.repository_owner }}
   maintainer-email:
     default: 'maintainer.email@example.com'
+  checkout-options:
+    description: 'JSON object for customizing actions/checkout options. Keys and values map directly to the input options supported by actions/checkout.'
+    # Note: the `fetch-depth = 0` fetches all git history for all branches and tags
+    default: |
+      '{
+        "clean": true,
+        "submodules": false,
+        "fetch-depth": 0
+      }'
+
 runs:
   using: 'composite'
   steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with: ${{ fromJSON(inputs.checkout-options) }}
 
     - name: Prepare
       id: prepare
