@@ -36,6 +36,9 @@ inputs:
     default: ${{ github.repository_owner }}
   maintainer-email:
     default: 'maintainer.email@example.com'
+  checkout-clean:
+    description: 'Don't clean on checkout action.'
+    default: false
 runs:
   using: 'composite'
   steps:
@@ -43,6 +46,7 @@ runs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0 #Number of commits to fetch. 0 indicates all history for all branches and tags
+        checkout-clean: ${{ inputs.checkout-clean }}
 
     - name: Prepare
       id: prepare
